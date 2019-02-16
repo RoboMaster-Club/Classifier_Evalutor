@@ -34,6 +34,8 @@ for logfileName in logfileNames:
     right = 0
     totalDist = 0
     logCount = 0
+    falsePos = 0
+    falseNeg = 0
     notFound = 0
 
     for line in logfile:
@@ -47,7 +49,7 @@ for logfileName in logfileNames:
             data = cursor.fetchone()[0]
         except TypeError:
             # Not found? Skip to next image
-            print("Not found:", frameName)
+            print("Not found on database:", frameName)
             notFound += 1
             continue
         labels = json.loads(data)
@@ -61,11 +63,16 @@ for logfileName in logfileNames:
             # In case of multiple labels in one frame
             # Select the one closest to prediction for evaluation
             dist = min(dist, math.sqrt(xdist**2 + ydist**2))
+        if dist == float("inf"):
+            # No label, false positive
+            print("False positive:", frameName)
+            falsePos += 1
+            continue
         if dist < DISTANCE_THRESHOLD:
             right += 1
         totalDist += dist
 
-    print("Prediction Result for %s: %f | Misclassified (found armor there is none): %f | Average Distance: %f" % (logfileName, right / logCount, notFound / logCount, totalDist / logCount))
+    print("Prediction Result for %s: %f | falsePos (found armor when there is none): %f | Average Distance: %f | Not found: %d" % (logfileName, right / logCount, falsePos / logCount, totalDist / logCount, notFound))
 
     logfile.close()
 cursor.close()
