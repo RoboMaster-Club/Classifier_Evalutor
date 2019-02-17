@@ -72,7 +72,7 @@ for logfileName in logfileNames:
             right += 1
         totalDist += dist
 
-    print("Prediction Result for %s: %f | falsePos (found armor when there is none): %f | Average Distance: %f | Not found: %d" % (logfileName, right / logCount, falsePos / logCount, totalDist / logCount, notFound))
+    print("Prediction Result for %s: %f | falsePos (found armor when there is none): %f | Average Distance: %f | Not found: %d | Total frame count: %d" % (logfileName, right / logCount, falsePos / logCount, totalDist / logCount, notFound, logCount))
 
     logfile.close()
 cursor.close()
