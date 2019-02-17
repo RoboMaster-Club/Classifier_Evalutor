@@ -17,7 +17,23 @@ Used for evaluating classifier prediction from log file with labeled data in dat
         
 1. Run the python script  
 
-        python main.py LOGFILE1 LOGFILE2 LOGFILE3
+        $python evalutor.py -h
+
+        usage: evaluator.py [-h] [--threshold [THRESHOLD]] [--loglevel [LOGLEVEL]]
+                    [LOGFILE]
+
+        positional arguments:
+        LOGFILE               Multiple log files directories separated by space
+
+        optional arguments:
+        -h, --help            show this help message and exit
+        --threshold [THRESHOLD]
+                                Set the distance threshold for evalution (default to
+                                be 10, meaning that predictions within 10 px is
+                                counted as correct prediction)
+        --loglevel [LOGLEVEL]
+                                Specify logging level (DEBUG|INFO|WARNING|CRITICAL),
+                                default to be INFO
 
 ## Configuration
 1. Change `DISTANCE_THRESHOLD` for different prediction tolerance (Default to be 10 pixels)

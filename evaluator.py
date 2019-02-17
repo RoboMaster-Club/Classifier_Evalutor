@@ -13,11 +13,11 @@ parser.add_argument("--threshold", help="Set the distance threshold for \
     evalution (default to be 10, meaning that predictions within 10 px is counted)",
     type=float, nargs="?", default=10)
 parser.add_argument("--loglevel", nargs="?", help="Specify logging level (DEBUG|INFO|WARNING|CRITICAL), default to be INFO", default="INFO")
-parser.add_argument("LOGFILE", help="Multiple log files directories separated by space", nargs="?")
+parser.add_argument("LOGFILE", help="Multiple log files directories separated by space", nargs="+")
 args = parser.parse_args()
 
-logfileNames = args.LOGFILE
 
+logfileNames = args.LOGFILE
 # For evaluating the result of prediction
 DISTANCE_THRESHOLD = args.threshold
 
