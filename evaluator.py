@@ -88,8 +88,8 @@ for logfileName in logfileNames:
             right += 1
         totalDist += dist
 
-    logging.info("Prediction Result for %s: %f | falsePos (found armor when there is none): %f | Average Distance: %f | Not found: %d | Total frame count: %d" 
-          % (logfileName, right / logCount, falsePos / logCount, totalDist / logCount, notFound, logCount))
+    logging.info("Prediction Result for %10s: %f | falsePos (found armor when there is none): %.4f | Average Distance: %.4f | Not found: %d | Correct frame count: %d | Total frame count: %d" 
+          % (logfileName, right / logCount, falsePos / logCount, totalDist / logCount, notFound, right, logCount))
     logfile.close()
 cursor.close()
 cnx.close()
