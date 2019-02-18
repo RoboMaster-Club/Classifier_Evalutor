@@ -91,9 +91,11 @@ for logfileName in logfileNames:
         if dist < DISTANCE_THRESHOLD:
             right += 1
         totalDist += dist
-
-    logging.info("Prediction Result for %10s: %f | falsePos (found armor when there is none): %.4f | Average Distance: %.4f | Not found: %d | Correct frame count: %d | Total frame count: %d" 
+    try:
+        logging.info("Prediction Result for %10s: %f | falsePos (found armor when there is none): %.4f | Average Distance: %.4f | Not found: %d | Correct frame count: %d | Total frame count: %d" 
           % (logfileName, right / logCount, falsePos / logCount, totalDist / logCount, notFound, right, logCount))
+    except ZeroDivisionError:
+        pass
     logfile.close()
 cursor.close()
 cnx.close()
