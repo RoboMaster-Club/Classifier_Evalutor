@@ -14,6 +14,7 @@ parser.add_argument("--threshold", help="Set the distance threshold for \
     type=float, nargs="?", default=10)
 parser.add_argument("--loglevel", nargs="?", help="Specify logging level (DEBUG|INFO|WARNING|CRITICAL), default to be INFO", default="INFO")
 parser.add_argument("LOGFILE", help="Multiple log files directories separated by space", nargs="+")
+parser.add_argument("--output", nargs="?", help="Store logging output into this file")
 args = parser.parse_args()
 
 
@@ -24,7 +25,10 @@ DISTANCE_THRESHOLD = args.threshold
 numeric_level = getattr(logging, args.loglevel.upper(), None)
 if not isinstance(numeric_level, int):
     raise ValueError('Invalid log level: %s' % args.loglevel)
-logging.basicConfig(level=numeric_level)
+if args.output:
+    logging.basicConfig(level=numeric_level, filename=args.output, filemode='w')
+else:
+    logging.basicConfig(level=numeric_level)
 
 try:
     # Connect to database
